@@ -20,10 +20,11 @@ module.exports = function(app) {
 			    res.status(400).send({});
 			  }
 			  else {
-			    res.status(200).send({
-			    	"status":"OK Response",
-			    	"intent": response.intents[0].intent
-			    });
+			  		console.log(JSON.stringify(response, null, 2));
+				    res.status(200).send({
+				    	"status":"OK Response",
+				    	"intent": response.intents[0].intent
+				    });
 				}
 			});
   		}
