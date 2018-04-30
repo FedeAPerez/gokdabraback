@@ -21,10 +21,18 @@ module.exports = function(app) {
 			  }
 			  else {
 			  		console.log(JSON.stringify(response, null, 2));
-				    res.status(200).send({
-				    	"status":"OK Response",
-				    	"intent": response.intents[0].intent
-				    });
+			  		if(response.intents[0]) {
+					    res.status(200).send({
+					    	"status":"OK Response",
+					    	"intent": response.intents[0].intent
+					    });
+					}
+					else {
+						res.status(400).send({
+							"operation":"getIntent",
+							"status":"400"
+						});
+					}
 				}
 			});
   		}
