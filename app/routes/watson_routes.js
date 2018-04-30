@@ -3,7 +3,7 @@
 module.exports = function(app) {
 	app.post('/intent',
 		(req, res) => {
-			console.log(req);
+			console.log(req.body);
 	    	// Gets the intent from watson
 	    	var AssistantV1 = require('watson-developer-cloud/assistant/v1');
 	    	var watsonAssistant = new AssistantV1({
