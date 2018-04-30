@@ -6,9 +6,10 @@ const app            	= express();
 
 const port 				= 8000;
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.options('*', cors()) 
-app.use(bodyParser.urlencoded({ extended: true }));
 
 
 require('./app/routes')(app);
