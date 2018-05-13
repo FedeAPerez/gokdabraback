@@ -1,10 +1,10 @@
 // routes/messages_content_routes.js
-const env = process.env.DV_ENV;
+const env = process.env.DB_ENV;
 
 module.exports = function(app, db_client) {
 	app.get('/contentmessages', 
 		(req,res) => {
-			const prospectsCollection = db_client.db(env).collection("contentmessages");
+			const prospectsCollection = db_client.db(DB_ENV).collection("contentmessages");
 			prospectsCollection.find({}).toArray()
 			.then((getResult) => {
 				console.log(getResult);
@@ -23,7 +23,7 @@ module.exports = function(app, db_client) {
 
 	app.post('/contentmessages',
 		(req, res) => {
-			const prospectsCollection = db_client.db(env).collection("contentmessages");
+			const prospectsCollection = db_client.db(DB_ENV).collection("contentmessages");
 			prospectsCollection.insertOne({
 				id_content_message : req.body.id_content_message,
 				content_message : req.body.content_message

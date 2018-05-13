@@ -5,13 +5,13 @@ const cors 				= require('cors')
 const app            	= express();
 var MongoClient = require('mongodb').MongoClient;
 const port 				= 8000;
-
+const DB_ENV = process.env.DB_ENV;
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 app.options('*', cors()) 
 
-var uri = "mongodb+srv://kdabra_back:KdabraArg2017@clusterkdabraprospects-gpmi4.mongodb.net/test?retryWrites=true";
+var uri = "mongodb+srv://kdabra_back:KdabraArg2017@clusterkdabraprospects-gpmi4.mongodb.net/"+DB_ENV+"?retryWrites=true";
 MongoClient.connect(uri, function(err, client) {
 	require('./app/routes')(app, client);
  });

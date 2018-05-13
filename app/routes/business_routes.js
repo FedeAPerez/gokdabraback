@@ -1,9 +1,10 @@
 // routes/business_routes.js
+const DB_ENV = process.env.DB_ENV;
 
 module.exports = function(app, db_client) {
 	app.get('/business', 
 		(req,res) => {
-			const prospectsCollection = db_client.db("test").collection("prospects");
+			const prospectsCollection = db_client.db(DB_ENV).collection("prospects");
 			prospectsCollection.find({}).toArray()
 			.then((getResult) => {
 				console.log(getResult);
@@ -21,7 +22,7 @@ module.exports = function(app, db_client) {
 	);
 	app.post('/business',
 		(req, res) => {
-			const prospectsCollection = db_client.db("test").collection("prospects");
+			const prospectsCollection = db_client.db(DB_ENV).collection("prospects");
 			prospectsCollection.insertOne({
 				contact_mail : req.body.contact_mail
 			}, function(err, res) {
