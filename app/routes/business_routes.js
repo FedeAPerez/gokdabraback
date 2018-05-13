@@ -4,13 +4,19 @@ module.exports = function(app, db_client) {
 	app.get('/business', 
 		(req,res) => {
 			const prospectsCollection = db_client.db("test").collection("prospects");
-			var getResult = prospectsCollection.find({}).toArray();
-			console.log(getResult);
-			res.status(200).send({
-				"route":"business",
-				"operation":"GET",
-				"data": getResult
+			prospectsCollection.find({}).toArray()
+			.then((getResult) => {
+				console.log(getResult);
+				res.status(200).send({
+					"route":"business",
+					"operation":"GET",
+					"data": getResult
+				});
+			})
+			.catch((err) => {
+
 			});
+
 		}
 	);
 	app.post('/business',
