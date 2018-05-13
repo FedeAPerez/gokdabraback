@@ -3,7 +3,7 @@
 module.exports = function(app, db_client) {
 	app.post('/business',
 		(req, res) => {
-			const prospectsCollection = client.db("test").collection("prospects");
+			const prospectsCollection = db_client.db("test").collection("prospects");
 			prospectsCollection.insertOne({
 				contact_mail:'req.body.contact_mail'
 			}, function(err, res) {
