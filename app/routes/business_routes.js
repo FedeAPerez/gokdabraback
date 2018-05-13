@@ -4,7 +4,7 @@ module.exports = function(app, db_client) {
 	app.get('/business', 
 		(req,res) => {
 			const prospectsCollection = db_client.db("test").collection("prospects");
-			var getResult = prospectsCollection.find().toArray();
+			var getResult = prospectsCollection.find({}).toArray();
 			res.status(200).send({
 				"route":"business",
 				"operation":"GET",
