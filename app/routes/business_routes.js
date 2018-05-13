@@ -3,7 +3,7 @@
 module.exports = function(app) {
 	app.post('/business',
 		(req, res) => {
-			res.status(200);
+			res.status(200).send({});
   		}
   	);
 };
