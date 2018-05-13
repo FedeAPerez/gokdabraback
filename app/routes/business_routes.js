@@ -23,7 +23,7 @@ module.exports = function(app, db_client) {
 		(req, res) => {
 			const prospectsCollection = db_client.db("test").collection("prospects");
 			prospectsCollection.insertOne({
-				contact_mail:'req.body.contact_mail'
+				contact_mail : req.body.contact_mail
 			}, function(err, res) {
 				console.log("errores " + err);
 				console.log("resultado " + res);
