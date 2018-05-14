@@ -29,7 +29,7 @@ module.exports = function(app, db_client, DB_ENV) {
 			const prospectsCollection = db_client.db(DB_ENV).collection("prospects");
 			prospectsCollection.insertOne({
 				contact_mail : contact_mail,
-				timestamp : timestamp;
+				timestamp : timestamp
 			}, function(err, res) {
 				console.log("errores " + err);
 				console.log("resultado " + res);
