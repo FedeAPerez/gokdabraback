@@ -21,9 +21,15 @@ module.exports = function(app, db_client, DB_ENV) {
 	);
 	app.post('/business',
 		(req, res) => {
+			// Asignación de variables
+			var timestamp = new Date().getTime();;
+			var contact_mail = req.body.contact_mail;
+
+			// CRUD a Mongo
 			const prospectsCollection = db_client.db(DB_ENV).collection("prospects");
 			prospectsCollection.insertOne({
-				contact_mail : req.body.contact_mail
+				contact_mail : contact_mail,
+				timestamp : timestamp;
 			}, function(err, res) {
 				console.log("errores " + err);
 				console.log("resultado " + res);
