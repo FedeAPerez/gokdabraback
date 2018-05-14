@@ -1,6 +1,6 @@
 // routes/doc_routes.js
 
-module.exports = function(app, db_client) {
+module.exports = function(app, db_client, DB_ENV) {
 
 	app.get('/doc',
 		(req, res) => {

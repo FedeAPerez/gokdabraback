@@ -1,7 +1,6 @@
 // routes/messages_content_routes.js
-const env = process.env.DB_ENV;
 
-module.exports = function(app, db_client) {
+module.exports = function(app, db_client, DB_ENV) {
 	app.get('/contentmessages', 
 		(req,res) => {
 			const prospectsCollection = db_client.db(DB_ENV).collection("contentmessages");
