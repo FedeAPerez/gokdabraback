@@ -78,8 +78,10 @@ module.exports = function(app, db_client) {
 			  			filteredData = filteredData.filter(elem => elem.price >= req.body.min_price);
 			  		}
 
-
-					returnItem(filteredData[Math.floor(Math.random() * (filteredData.length-1)) + 0  ].id)
+			  		var index =Math.floor(Math.random() * (filteredData.length-1)) + 0;
+			  		var length = filteredData.length;
+			  		console("di " + index + " llegaba hasta " + length);
+					returnItem(filteredData[index].id)
 					.then((responseaxios) => {
 						console.log({data : responseaxios.data});
 						res.send({data : responseaxios.data});
