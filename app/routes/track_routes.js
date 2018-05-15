@@ -23,8 +23,8 @@ module.exports = function(app, db_client, DB_ENV) {
 		(req, res) => {
 			// Asignación de variables
 			var timestamp = new Date();
-			var data = req.body.data;
-
+			var data = req.body.stack;
+			console.log("quieren grabar con " + data);
 			// CRUD a Mongo
 			const prospectsCollection = db_client.db(DB_ENV).collection("track");
 			prospectsCollection.insertOne({
