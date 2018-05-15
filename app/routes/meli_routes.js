@@ -80,7 +80,7 @@ module.exports = function(app, db_client) {
 
 			  		var index =Math.floor(Math.random() * (filteredData.length-1)) + 0;
 			  		var length = filteredData.length;
-			  		console("di " + index + " llegaba hasta " + length);
+			  		console.log("di " + index + " llegaba hasta " + length);
 					returnItem(filteredData[index].id)
 					.then((responseaxios) => {
 						console.log({data : responseaxios.data});
