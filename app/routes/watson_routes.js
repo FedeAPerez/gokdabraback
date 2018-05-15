@@ -21,11 +21,20 @@ module.exports = function(app, db_client) {
 			    res.status(400).send({});
 			  }
 			  else {
-			  		console.log(JSON.stringify(response, null, 2));
+			  		var filEntity = [];
+			  		if(response.entities) {
+			  			for (var i = 0; i < response.entities.length; i++) {
+			  				filEntity.push({
+			  					'id' : response.entities[i].entity,
+			  					'value' : response.entities[i].value
+			  				});
+			  			}
+			  		}
 			  		if(response.intents[0]) {
 					    res.status(200).send({
 					    	"status":"OK Response",
-					    	"intent": response.intents[0].intent
+					    	"intent": response.intents[0].intent,
+					    	"entities" : filEntity
 					    });
 					}
 					else {

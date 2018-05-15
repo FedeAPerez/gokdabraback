@@ -2,10 +2,20 @@
 var dexterGenericStringFemale = "https://api.mercadolibre.com/sites/MLA/search?seller_id=306401715&category=MLA109027&gender=female";
 
 var dexterGenericStringMale = "https://api.mercadolibre.com/sites/MLA/search?seller_id=306401715&category=MLA109027&gender=male";
-
+const urlMlaOb = 'https://api.mercadolibre.com/items/';
 const axios = require('axios');
 
 module.exports = function(app, db_client) {
+
+	function returnItem(mla) {
+		return axios.get(
+			urlMlaOb+mla,
+			{
+            	headers: {
+            		'Content-Type': 'application/json'
+            	}
+        	});
+	}
 
 	function filterList(url, filter_id, filter_value) {
 		var urlFinal = url+'&'+filter_id+'='+filter_value;
@@ -48,11 +58,13 @@ module.exports = function(app, db_client) {
 			  	var nextFilters = response.data.available_filters;
 
 			  	var talle = req.body.talle;
+			  	console.log("ME llega en el req " + JSON.stringify(req.body));
 			  	var selectedFilter = nextFilters.find(elem => elem.name.toLowerCase() == 'talle');
 			  	var selectedFilterValues = selectedFilter.values.find(elem => elem.name.toLowerCase() == talle.toString());
 
 			  	var allResults = response.data.results;
 			  	var filteredResult = allResults;
+			  	console.log("me esta rompiendo en " + selectedFilterValues);
 
 			  	filterList(dexterGenericString, selectedFilter.id, selectedFilterValues.id)
 			  	.then((result) => {
@@ -67,10 +79,14 @@ module.exports = function(app, db_client) {
 			  		}
 
 
-			  		res.send({ 
-					    "total_length" : filteredData.length,
-					    "data" : filteredData[Math.floor(Math.random() * (filteredData.length-1)) + 0  ]
-					});
+					returnItem(filteredData[Math.floor(Math.random() * (filteredData.length-1)) + 0  ].id)
+					.then((responseaxios) => {
+						console.log({data : responseaxios.data});
+						res.send({data : responseaxios.data});
+					})
+					.catch((err) => {
+						console.log(err);
+					})
 			  	})
 			  	.catch((err) => {
 
