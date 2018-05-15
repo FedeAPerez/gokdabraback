@@ -5,17 +5,19 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startdev":"set DB_ENV=test && nodemon server.js",
+    "startdev": "set DB_ENV=test && nodemon server.js",
     "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "mongodb": "^3.1.0-beta4",
+    "request": "^2.85.0",
     "watson-developer-cloud": "^3.4.0"
   },
   "devDependencies": {

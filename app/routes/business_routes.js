@@ -22,7 +22,7 @@ module.exports = function(app, db_client, DB_ENV) {
 	app.post('/business',
 		(req, res) => {
 			// Asignación de variables
-			var timestamp = new Date().getTime();;
+			var timestamp = new Date();
 			var contact_mail = req.body.contact_mail;
 
 			// CRUD a Mongo
