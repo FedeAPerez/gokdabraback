@@ -1,7 +1,7 @@
 // routes/business_routes.js
 
 module.exports = function(app, db_client, DB_ENV) {
-	app.get('/business', 
+	app.get('/business/prospect/all', 
 		(req,res) => {
 			const prospectsCollection = db_client.db(DB_ENV).collection("prospects");
 			prospectsCollection.find({}).toArray()
@@ -19,7 +19,8 @@ module.exports = function(app, db_client, DB_ENV) {
 
 		}
 	);
-	app.post('/business',
+
+	app.post('/business/prospect',
 		(req, res) => {
 			// Asignación de variables
 			var timestamp = new Date();
@@ -30,14 +31,18 @@ module.exports = function(app, db_client, DB_ENV) {
 			prospectsCollection.insertOne({
 				contact_mail : contact_mail,
 				timestamp : timestamp
-			}, function(err, res) {
-				console.log("errores " + err);
-				console.log("resultado " + res);
+			})
+			.then((insertResult) => {
+				res.status(204).send({
+					"route":"business",
+					"operation":"POST",
+					"data": insertResult
+				});
+			})
+			.catch((err) => {
+
 			});
-			res.status(204).send({
-				"route":"business",
-				"operation":"POST"
-			});
+
   		}
   	);
 };
