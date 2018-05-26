@@ -5,7 +5,7 @@ var dexterGenericStringMale = "https://api.mercadolibre.com/sites/MLA/search?sel
 const urlMlaOb = 'https://api.mercadolibre.com/items/';
 const axios = require('axios');
 
-module.exports = function(app, db_client) {
+module.exports = function(app, db_client, DB_ENV) {
 
 	function returnItem(mla) {
 		return axios.get(

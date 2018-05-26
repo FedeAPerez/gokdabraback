@@ -1,6 +1,6 @@
 // routes/watson_routes.js
 
-module.exports = function(app, db_client) {
+module.exports = function(app, db_client, DB_ENV) {
 	app.post('/intent',
 		(req, res) => {
 			console.log("PING PING " + req.body.message);

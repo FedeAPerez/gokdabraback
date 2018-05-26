@@ -6,6 +6,7 @@ const app            	= express();
 var MongoClient = require('mongodb').MongoClient;
 const port 				= 8000;
 const DB_ENV = process.env.DB_ENV.trim();
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
