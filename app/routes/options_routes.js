@@ -24,6 +24,30 @@ module.exports = function(app, db_client, DB_ENV) {
 		}
 	);
 
+	app.post('/options/collection', 
+		(req,res) =>{
+			const optionsCollection = db_client.db(DB_ENV).collection("options");
+			optionsCollection.createIndex( { "id_option": 1}, { unique: true } )
+			.then((resu) => {
+				res.send({"resu" : resu});
+			})
+			.catch((err) => {
+				res.send({"resu" : err});
+			});
+	});
+
+	app.post('/options/collection/delete', 
+		(req,res) =>{
+			const optionsCollection = db_client.db(DB_ENV).collection("options");
+			optionsCollection.drop()
+			.then((resu) => {
+				res.send({"resu" : resu});
+			})
+			.catch((err) => {
+				res.send({"resu" : err});
+			});
+	});
+
 	app.post('/options', 
 		(req,res) => {
 			const optionsCollection = db_client.db(DB_ENV).collection("options");
@@ -43,6 +67,10 @@ module.exports = function(app, db_client, DB_ENV) {
 				{
 					id_option : "contact",
 					show_message : "Formas de Contacto"
+				},
+				{
+					id_option : "welcome",
+					show_message : "Mensaje de Bienvenida"
 				}
 			])
 			.then((insertResult) => {
