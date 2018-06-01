@@ -5,15 +5,20 @@ module.exports = function(app, db_client, DB_ENV) {
 			const prospectsCollection = db_client.db(DB_ENV).collection("prospects");
 			prospectsCollection.find({}).toArray()
 			.then((getResult) => {
-				console.log(getResult);
-				res.status(200).send({
+				res.send({
 					"route":"prospect",
 					"operation":"GET",
+					"status_code":200,
 					"data": getResult
 				});
 			})
 			.catch((err) => {
-
+				res.send({
+					"route":"prospect",
+					"operation":"GET",
+					"status_code":500,
+					"data": err
+				});
 			});
 
 		}
@@ -32,15 +37,21 @@ module.exports = function(app, db_client, DB_ENV) {
 				timestamp : timestamp
 			})
 			.then((insertResult) => {
-				res.status(204).send({
+				res.send({
 					"route":"prospect",
 					"operation":"POST",
+					"status_code":204,
 					"data": insertResult,
 					"show_message": "Mmm... parece que esta dirección de mail ya tiene registrado un negocio."
 				});
 			})
 			.catch((err) => {
-
+				res.send({
+					"route":"prospect",
+					"operation":"POST",
+					"status_code":500,
+					"data": err
+				});
 			});
 
   		}
@@ -51,7 +62,6 @@ module.exports = function(app, db_client, DB_ENV) {
 		  const prospectsCollection = db_client.db(DB_ENV).collection("business");
 		  prospectsCollection.find({}).toArray()
 		  .then((getResult) => {
-			  console.log(getResult);
 			  res.send({
 				  "route":"business",
 				  "operation":"GET",
@@ -60,7 +70,12 @@ module.exports = function(app, db_client, DB_ENV) {
 			  });
 		  })
 		  .catch((err) => {
-
+			res.send({
+				"route":"business",
+				"operation":"GET",
+				"status_code":500,
+				"data": err
+			});
 		  });
 
 	  }
